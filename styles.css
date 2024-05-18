@@ -20,18 +20,18 @@ body {
 }
 
 .main-content {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 30px;
     justify-content: center;
     align-items: center;
-
 }
 
 .board-container {
     display: grid;
     grid-template-columns: repeat(3, auto);
-    width: 450px;
-    height: 450px;
+    width: 468px;
+    height: 468px;
     gap: 1px;
 }
 
@@ -39,4 +39,12 @@ body {
     border: 3px solid black;
     width: 150px;
     height: 150px;
+}
+
+.main-game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
