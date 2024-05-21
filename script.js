@@ -14,9 +14,10 @@ const playerTwo = {
 
 const displayController = (function() {
     const cells = document.querySelectorAll(".cell");
-    const board = document.getElementsByClassName("board-container");
-    const resetButton = document.getElementById("restart");
+    const resetButton = document.getElementsByClassName("restart");
     let currentPlayer = playerOne;
+    const score1 = document.getElementsByClassName("player-1-score");
+    const score2 = document.getElementsByClassName("player-2-score");
 
     const gameBoard = {
         currentGameBoard: ['', '', '', '', '', '', '', '', '']
@@ -48,18 +49,25 @@ const displayController = (function() {
         playerTwo.moves = [];
         currentPlayer = playerOne;
         cells.forEach(cell => cell.textContent = "");
+        cells.forEach(cell => cell.addEventListener('click', handleClick, { once: true }));
     }
 
     function playGame() {
-        currentPlayer = playerOne;
         cells.forEach((cell, index) => {
-            cell.addEventListener('click', () => move(index));
+            cell.addEventListener('click', handleClick, { once: true });
         });
         resetButton.addEventListener('click', restartGame);
     }
 
+    function handleClick(event) {
+        const cell = event.target;
+        const index = Array.from(cells).indexOf(cell);
+        move(index);
+    }
+
+
     function move(index) {
-        if (gameBoard.currentGameBoard[index] !== '' || checkWin(playerOne) || checkWin(playerTwo)) {
+        if (gameBoard.currentGameBoard[index] !== '') {
             return;
         }
 
@@ -69,6 +77,8 @@ const displayController = (function() {
 
         if (checkWin(currentPlayer)) {
             alert(currentPlayer.name + " wins!");
+            currentPlayer.score++;
+            updateScores();
             restartGame();
             return;
         }
@@ -84,7 +94,15 @@ const displayController = (function() {
         cells.forEach((cell, index) => {
             cell.textContent = gameBoard.currentGameBoard[index];
         });
+        score1.textContent = playerOne.score;
+        score2.textContent = playerTwo.score;
     }
+
+    function updateScores() {
+        Array.from(score1).forEach(element => element.textContent = playerOne.score);
+        Array.from(score2).forEach(element => element.textContent = playerTwo.score);
+    }
+
     playGame()
 })();
 
