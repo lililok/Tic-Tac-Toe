@@ -12,16 +12,21 @@ const playerTwo = {
     moves: []
 };
 
-const displayController = (function() {
+const playGame = (function() {
     const cells = document.querySelectorAll(".cell");
-    const resetButton = document.getElementsByClassName("restart");
+    const resetButton = document.querySelector(".restart");
     let currentPlayer = playerOne;
-    const score1 = document.getElementsByClassName("player-1-score");
-    const score2 = document.getElementsByClassName("player-2-score");
+    const score1 = document.querySelector(".player-1-score");
+    const score2 = document.querySelector(".player-2-score");
 
     const gameBoard = {
         currentGameBoard: ['', '', '', '', '', '', '', '', '']
     };
+
+    cells.forEach((cell, index) => {
+        cell.addEventListener('click', handleClick, { once: true });
+    });
+    resetButton.addEventListener('click', restartGame);
 
     function checkWin(player) {
         const winningCombinations = [
@@ -52,13 +57,6 @@ const displayController = (function() {
         cells.forEach(cell => cell.addEventListener('click', handleClick, { once: true }));
     }
 
-    function playGame() {
-        cells.forEach((cell, index) => {
-            cell.addEventListener('click', handleClick, { once: true });
-        });
-        resetButton.addEventListener('click', restartGame);
-    }
-
     function handleClick(event) {
         const cell = event.target;
         const index = Array.from(cells).indexOf(cell);
@@ -76,15 +74,19 @@ const displayController = (function() {
         render();
 
         if (checkWin(currentPlayer)) {
-            alert(currentPlayer.name + " wins!");
             currentPlayer.score++;
             updateScores();
-            restartGame();
+            setTimeout(() => {
+                alert(currentPlayer.name + " wins!");
+                restartGame();
+            }, 100);
             return;
         }
         if (gameBoard.currentGameBoard.every(cell => cell !== '')) {
-            alert("It's a draw!");
-            restartGame();
+            setTimeout(() => {
+                alert("It's a draw!");
+                restartGame();
+            }, 100);
             return;
         }
         currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
@@ -99,11 +101,9 @@ const displayController = (function() {
     }
 
     function updateScores() {
-        Array.from(score1).forEach(element => element.textContent = playerOne.score);
-        Array.from(score2).forEach(element => element.textContent = playerTwo.score);
+        score1.textContent = playerOne.score;
+        score2.textContent = playerTwo.score;
     }
-
-    playGame()
 })();
 
-displayController();
+
