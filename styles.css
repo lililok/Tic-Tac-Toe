@@ -1,7 +1,6 @@
 body, html {
     margin: 0;
     padding: 0;
-    height: 100vh;
     box-sizing: border-box;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color: aliceblue;
@@ -9,6 +8,9 @@ body, html {
 
 body {
     background-color: #855d5d;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr 6fr;
 }
 
 .header {
@@ -22,7 +24,8 @@ body {
 .main-content {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    padding: 30px;
+    padding: 20px;
+    gap: 30px;
     justify-content: center;
     align-items: center;
 }
@@ -33,14 +36,17 @@ body {
     width: 468px;
     height: 468px;
     gap: 1px;
+    background-color: rgb(92, 83, 83);
 }
 
 .cell {
-    border: 3px solid black;
+    border: 3px solid rgb(44, 34, 34);
     width: 150px;
     height: 150px;
     font-size: 900;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .main-game {
@@ -48,7 +54,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
 }
 
 .player-1 {
@@ -63,4 +69,20 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.restart img {
+    width: 100px;
+    height: 100px;
+}
+
+.pan {
+    width: 550px;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(43, 38, 38);
+    border-radius: 50px;
 }

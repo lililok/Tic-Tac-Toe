@@ -1,13 +1,13 @@
 const playerOne = {
     name: "player1",
-    mark: "X",
+    mark: '<img src="icons/bacon-svgrepo-com.svg" alt="bacon-mark-x">',
     score: 0,
     moves: []
 };
 
 const playerTwo = {
     name: "player2",
-    mark: "O",
+    mark: '<img src="icons/egg-svgrepo-com.svg" alt="egg-mark-o">',
     score: 0,
     moves: []
 };
