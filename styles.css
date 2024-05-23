@@ -7,7 +7,7 @@ body, html {
 }
 
 body {
-    background-color: #855d5d;
+    background-color: #d8a548;
     height: 100vh;
     display: grid;
     grid-template-rows: 1fr 6fr;
@@ -85,4 +85,14 @@ body {
     align-items: center;
     background-color: rgb(43, 38, 38);
     border-radius: 50px;
+}
+
+img.x {
+    width: 100px;
+    height: 100px;
+}
+
+img.o {
+    width: 100px;
+    height: 100px;
 }

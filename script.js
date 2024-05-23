@@ -1,15 +1,17 @@
 const playerOne = {
-    name: "player1",
-    mark: '<img src="icons/bacon-svgrepo-com.svg" alt="bacon-mark-x">',
+    name: "Player 1",
+    mark: '<img class="x" src="icons/bacon-svgrepo-com.svg" alt="bacon-mark-x">',
     score: 0,
-    moves: []
+    moves: [],
+    current: true
 };
 
 const playerTwo = {
-    name: "player2",
-    mark: '<img src="icons/egg-svgrepo-com.svg" alt="egg-mark-o">',
+    name: "Player 2",
+    mark: '<img class="o" src="icons/egg-svgrepo-com.svg" alt="egg-mark-o">',
     score: 0,
-    moves: []
+    moves: [], 
+    current: false
 };
 
 const playGame = (function() {
@@ -18,6 +20,8 @@ const playGame = (function() {
     let currentPlayer = playerOne;
     const score1 = document.querySelector(".player-1-score");
     const score2 = document.querySelector(".player-2-score");
+    const turn1 = document.querySelector(".player-1-turn");
+    const turn2 = document.querySelector(".player-2-turn");
 
     const gameBoard = {
         currentGameBoard: ['', '', '', '', '', '', '', '', '']
@@ -55,6 +59,8 @@ const playGame = (function() {
         currentPlayer = playerOne;
         cells.forEach(cell => cell.textContent = "");
         cells.forEach(cell => cell.addEventListener('click', handleClick, { once: true }));
+        turn1.textContent = 'Your turn';
+        turn2.textContent = '';
     }
 
     function handleClick(event) {
@@ -90,19 +96,28 @@ const playGame = (function() {
             return;
         }
         currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
+        updateTurns();
     }
 
     function render() {
         cells.forEach((cell, index) => {
-            cell.textContent = gameBoard.currentGameBoard[index];
+            cell.innerHTML = gameBoard.currentGameBoard[index];
         });
-        score1.textContent = playerOne.score;
-        score2.textContent = playerTwo.score;
     }
 
     function updateScores() {
         score1.textContent = playerOne.score;
         score2.textContent = playerTwo.score;
+    }
+
+    function updateTurns() {
+        if (currentPlayer === playerOne) {
+            turn1.textContent = 'Your turn';
+            turn2.textContent = '';
+        } else {
+            turn1.textContent = '';
+            turn2.textContent = 'Your turn';
+        }
     }
 })();
 
